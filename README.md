@@ -26,6 +26,9 @@ Nach dem wiegen nach y auflösen gibt die Zahl der defekten Maschine
 
 React Frontend with NestJS Backend as separate services.
 
+React project created via create-react-app.
+NestJS create via Nest CLI
+
 NestJS runs locally on Port 3001
 React runs locally on Port 3000
 
@@ -41,5 +44,5 @@ There are obviously lots of things that can be added or need to be refactored.
     Error handling for promise rejections
 </li>
 <li>
-    Missing barcode type validation. Possibly regex needed :expressionless:	
+    Missing barcode type validation. regex needed :expressionless:	
 </li>
