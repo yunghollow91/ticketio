@@ -1,12 +1,12 @@
-export interface Tickets {
+export interface ITickets {
   barcode: string;
   firstName: string;
-  lastname: string;
+  lastName: string;
 }
 
-export interface Event {
+export interface EventTickets {
   eventTitle: string;
   eventDate: Date;
   eventCity: string;
-  tickets: Tickets[];
+  tickets: ITickets[];
 }

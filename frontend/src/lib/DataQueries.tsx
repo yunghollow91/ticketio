@@ -1,7 +1,14 @@
-import React from 'react'
+import { IEventInfo } from "../dto/EventInfo";
 
-export const getEventData = () => {
-   const data =  fetch(process.env.HOST || 'http://localhost:3001')
-
-   return data;
-}
+export const getEventInfo = async (): Promise<IEventInfo[]> => {
+  const path = "/eventTickets";
+  const response = await fetch(
+    process.env.API_URL || "http://localhost:3001" + path
+  ).then((response) => {
+    return response;
+  });
+  if (!response.ok) {
+    throw new Error("Request failed " + response.status);
+  }
+  return await response.json();
+};

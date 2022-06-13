@@ -6,62 +6,93 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {getEventData} from "../lib/DataQueries"
+import { getEventInfo } from "../lib/DataQueries";
+import { IEventInfo, ITickets } from "../dto/EventInfo";
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
+function createDefaultTickets(
+  barcode: string,
+  firstName: string,
+  lastName: string
 ) {
-  return { name, calories, fat, carbs, protein };
+  return { barcode, firstName, lastName };
 }
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+function createDefaultEvent(
+  eventTitle: string,
+  eventDate: Date,
+  eventCity: string,
+  tickets: ITickets[]
+) {
+  return { eventTitle, eventDate, eventCity, tickets };
+}
 
-export default function BasicTable() {
-  const [eventData, setEventData] = useState({});
+// const eventDate = new Date("July 18, 1975 23:15:30");
+// const dummyData = [
+//   createDefaultEvent("Money Boy", eventDate, "Köln", [
+//     createDefaultTickets("234", "344", "3434"),
+//   ]),
+// ];
+
+// const formatResponse = (response: Promise<Response>) => {
+//   const formattedData: EventInfo = {...response};
+//   return formattedData;
+// }
+
+const BasicTable = () => {
+  const [eventData, setEventData] = useState<IEventInfo[] | undefined>(
+    undefined
+  );
 
   useEffect(() => {
-    setEventData(getEventData());
-  })
+    async function getData() {
+      const data = await getEventInfo();
+      setEventData(data);
+    }
+    getData();
+  },[ ]);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+    <>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Title</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>City</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {eventData?.map((event) => {
+              return (
+                <>
+                  <TableCell>{event.eventTitle}</TableCell>
+                  <TableCell>{event.eventDate.toString()}</TableCell>
+                  <TableCell>{event.eventCity}</TableCell>
+                  {/* Ticket List */}
+                  <TableRow>
+                    <TableCell>Barcode</TableCell>
+                    <TableCell>First Name</TableCell>
+                    <TableCell>Last Name</TableCell>
+                  </TableRow>
+                  {event["tickets"]?.map((ticket) => {
+                    return (
+                      <>
+                        <TableRow>
+                          <TableCell>{ticket.barcode}</TableCell>
+                          <TableCell>{ticket.firstName}</TableCell>
+                          <TableCell>{ticket.lastName}</TableCell>
+                        </TableRow>
+                      </>
+                    );
+                  })}
+                </>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
-}
+};
+export default BasicTable;
