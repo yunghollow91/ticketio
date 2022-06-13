@@ -1,4 +1,28 @@
-# Introduction
+# 1st Task Gedanken-Aufgabe
+
+Problem:
+
+Du hast vor dir 10 Maschinen die Münzen prägen. Die Münzen sehen alle gleich aus! Die Münzen wiegen 100 Gramm. 
+Allerdings ist eine Maschine kaputt und die Münzen der Maschine wiegen 10 Gramm. Münzen stehen unendlich pro Maschine bereit und es gibt eine Digitalwaage mit der ich einmal wiegen darf, um heraus zu finden welche Maschine defekt ist. Welche Maschine ist defekt?
+
+Lösung:
+
+Sei X_i eine nummerierte Maschine wobei i Element von {1,...,10}
+
+Sei f(X_i) = i * g_i eine Funktion die eine Anzahl von Münzen aus der Maschine i gibt mit dem dazugehörigen Gewicht der Münze.
+
+=> Summe der f(X_i) von 1 bis n mit Gauss Formel und der Annahme dass alle Maschinen einwandfrei funktionieren ergibt 10(10+1) * 1/2 * 100g = 5500g
+
+Sei X_y die defekte Maschine mit y Element von {1,...,10}
+
+Dann gilt für y:
+
+5500 - (100-10)*y = Summe aller gewogenen Münzen 
+
+Nach dem wiegen nach y auflösen gibt die Zahl der defekten Maschine 
+
+
+# 2nd Task
 
 React Frontend with NestJS Backend as separate services.
 
