@@ -33,7 +33,9 @@ NestJS runs locally on Port 3001
 React runs locally on Port 3000
 
 There are obviously lots of things that can be added or need to be refactored.
-
+<li>
+    Frontend is functional but doesn't look nice. Just used pre-existing Material-UI components to somehow display ist.
+</li>
 <li>
     Unit Tests for both Front and Backend
 </li>
