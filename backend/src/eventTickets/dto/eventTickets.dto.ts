@@ -1,5 +1,7 @@
 import { IsNotEmpty, IsDate, ValidateNested, Validate } from 'class-validator';
 
+// Not used right now but can be leveraged for further POST
+
 export class EventTicketsDTO {
   @IsNotEmpty()
   readonly eventTitle: string;

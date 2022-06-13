@@ -4,7 +4,10 @@ const eventDate = new Date('July 18, 1975 23:15:30');
 
 export const dummyData = [
   createDefaultEvent('Money Boy', eventDate, 'Köln', [
-    createDefaultTickets('234', '344', '3434'),
+    createDefaultTickets('53848834', 'Yung', 'Hollow'),
+  ]),
+  createDefaultEvent('Some Other Event', eventDate, 'Köln', [
+    createDefaultTickets('63452594', 'Der', 'Krankmann'),
   ]),
 ];
 
